@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Services;
+
+use App\Enums\ProjectStatus;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Project;
+use Illuminate\Database\Eloquent\Collection;
+
+class ProjectService
+{
+    public function getProjects(): Collection
+    {
+        return Project::all();
+    }
+
+    public function getProject(int $id): Project
+    {
+        return Project::findOrFail($id);
+    }
+
+    public function createProject(StoreProjectRequest $request): void
+    {
+        $project = Project::create([
+            "name" => $request->name,
+            "description" => $request->description,
+            "start_date" => $request->start_date,
+            "end_date" => $request->end_date,
+            "status" => ProjectStatus::New,
+        ]);
+
+        //Cover::create([
+        //    "book_id" => $book->id,
+        //    "color" => $request->cover_color,
+        //    "format" => $request->cover_format,
+        //]);
+    }
+
+    public function updateProject(UpdateProjectRequest $request, int $id): void
+    {
+        $project = Project::findOrFail($id);
+
+        $project->update([
+            "name" => $request->name,
+            "description" => $request->description,
+            "start_date" => $request->start_date,
+            "end_date" => $request->end_date,
+            "status" => ProjectStatus::Pending,
+        ]);
+
+        // if ($book->cover()) {
+        //     $book->cover()->update([
+        //         "book_id" => $book->id,
+        //         "color" => isset($request->cover_color) ? $request->cover_color : $book->color,
+        //         "format" => isset($request->cover_format) ? $request->cover_format : $book->format,
+        //     ]);
+        // } else {
+        //     Cover::create([
+        //         "book_id" => $book->id,
+        //         "color" => $request->cover_color,
+        //         "format" => $request->cover_format,
+        //     ]);
+        // }
+    }
+
+    public function deleteProject(int $id): void
+    {
+        Project::destroy($id);
+    }
+}
