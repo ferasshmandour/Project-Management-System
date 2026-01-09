@@ -66,7 +66,7 @@
                                 <label for="project_id" class="form-label fw-semibold">Project</label>
                                 <select class="form-select @error('project_id') is-invalid @enderror" id="project_id"
                                     name="project_id">
-                                    <option value="">{{ old('project_id', $task->project->name) }}</option>
+                                    <option selected disabled>{{ old('project_id', $task->project->name) }}</option>
                                     @foreach ($projects as $project)
                                         <option value="{{ $project->id }}">
                                             {{ $project->name }}
@@ -83,7 +83,7 @@
                                 <label for="status_id" class="form-label fw-semibold">Status</label>
                                 <select class="form-select @error('status_id') is-invalid @enderror" id="status_id"
                                     name="status_id">
-                                    <option value="">{{ old('status_id', $task->status->name) }}</option>
+                                    <option selected disabled>{{ old('status_id', $task->status->name) }}</option>
                                     @foreach ($statuses as $status)
                                         <option value="{{ $status->id }}">
                                             {{ $status->name }}

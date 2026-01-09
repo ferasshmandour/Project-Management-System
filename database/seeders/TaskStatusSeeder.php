@@ -33,5 +33,10 @@ class TaskStatusSeeder extends Seeder
             "name" => TaskStatus::Done,
             "color" => "success"
         ]);
+
+        Status::create([
+            "name" => TaskStatus::Active,
+            "color" => "success"
+        ]);
     }
 }

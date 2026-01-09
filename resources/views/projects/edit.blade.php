@@ -77,7 +77,7 @@
                                 <label for="status" class="form-label fw-semibold">Status</label>
                                 <select class="form-select @error('status') is-invalid @enderror" id="status"
                                     name="status">
-                                    <option value="">{{ old('status', $project->status) }}</option>
+                                    <option selected disabled>{{ old('status', $project->status) }}</option>
                                     @foreach ($statuses as $status)
                                         <option value="{{ $status }}">
                                             {{ $status }}

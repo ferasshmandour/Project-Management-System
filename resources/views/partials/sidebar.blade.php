@@ -33,6 +33,12 @@
                     <i class="bi bi-plus-square me-2"></i> Create Task
                 </a>
             </li>
+            <li>
+                <a href="{{ route('tasks.assigned') }}"
+                    class="text-light text-decoration-none d-flex align-items-center p-2 rounded hover-link">
+                    <i class="bi bi-plus-square me-2"></i> Task Assignment
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

@@ -5,8 +5,10 @@ namespace App\Services;
 use App\Models\Task;
 use App\Enums\TaskStatus;
 use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\AssignTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Status;
+use App\Models\TaskUser;
 use Illuminate\Database\Eloquent\Collection;
 
 class TaskService
@@ -21,7 +23,7 @@ class TaskService
         return Task::where('project_id', $projectId)->get();
     }
 
-    public function getTask(int $id): Task
+    public function getTask($id): Task
     {
         return Task::findOrFail($id);
     }
@@ -62,5 +64,23 @@ class TaskService
     public function taskStatuses(): Collection
     {
         return Status::all();
+    }
+
+    public function getAssignedTasks(): Collection
+    {
+        return TaskUser::all();
+    }
+
+    public function assignTask(AssignTaskRequest $request): void
+    {
+        TaskUser::create([
+            'task_id' => $request->task_id,
+            'user_id' => $request->user_id,
+        ]);
+    }
+
+    public function deAssignTask(int $id): void
+    {
+        TaskUser::destroy($id);
     }
 }
