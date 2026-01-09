@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use App\Services\ProjectService;
@@ -31,7 +31,8 @@ class ProjectController extends Controller
 
     public function create(): View
     {
-        return view("projects.create");
+        $statuses = $this->projectService->getStatuses();
+        return view("projects.create", compact("statuses"));
     }
 
     public function store(StoreProjectRequest $request)
@@ -47,7 +48,8 @@ class ProjectController extends Controller
     public function edit(int $id): View
     {
         $project = $this->projectService->getProject($id);
-        return view("projects.edit", compact("project"));
+        $statuses = $this->projectService->getStatuses();
+        return view("projects.edit", compact("project", "statuses"));
     }
 
     public function update(UpdateProjectRequest $request, int $id)

@@ -21,9 +21,10 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Published</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                                 <th>Status</th>
                                 <th>Created</th>
                                 <th>Updated</th>
@@ -32,29 +33,24 @@
                         </thead>
 
                         <tbody>
-                            @forelse ($books as $book)
+                            @forelse ($projects as $project)
                                 <tr>
-                                    <td class="fw-semibold">{{ $book->id }}</td>
-                                    <td>{{ $book->title }}</td>
-                                    <td>{{ $book->author }}</td>
-                                    <td>{{ $book->published_year }}</td>
-                                    <td>
-                                        @if ($book->is_available)
-                                            <span class="badge bg-success">Available</span>
-                                        @else
-                                            <span class="badge bg-danger">Not Available</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-muted">{{ $book->created_at->format('Y-m-d') }}</td>
-                                    <td class="text-muted">{{ $book->updated_at->format('Y-m-d') }}</td>
-                                    <td class="text-end">
+                                    <td class="fw-semibold">{{ $project->id }}</td>
+                                    <td>{{ $project->name }}</td>
+                                    <td>{{ $project->description }}</td>
+                                    <td>{{ $project->start_date }}</td>
+                                    <td>{{ $project->end_date }}</td>
+                                    <td>{{ $project->status }}</td>
+                                    <td>{{ $project->created_at->format('Y-m-d') }}</td>
+                                    <td>{{ $project->updated_at->format('Y-m-d') }}</td>
 
-                                        <a href="{{ route('projects.edit', $book->id) }}"
+                                    <td class="text-end">
+                                        <a href="{{ route('projects.edit', $project->id) }}"
                                             class="btn btn-outline-warning btn-sm">
                                             Edit
                                         </a>
 
-                                        <form action="{{ route('projects.delete', $book->id) }}" method="POST"
+                                        <form action="{{ route('projects.destroy', $project->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')

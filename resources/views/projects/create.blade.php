@@ -33,78 +33,59 @@
                             @csrf
 
                             <div class="mb-3">
-                                <label for="title" class="form-label fw-semibold">Title</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                    id="title" name="title" value="{{ old('title') }}"
-                                    placeholder="Enter book title">
-                            </div>
-
-                            @error('title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                            <div class="mb-3">
-                                <label for="author" class="form-label fw-semibold">Author</label>
-                                <input type="text" class="form-control @error('author') is-invalid @enderror"
-                                    id="author" name="author" value="{{ old('author') }}"
-                                    placeholder="Enter author name">
-                            </div>
-
-                            @error('author')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                            <div class="mb-3">
-                                <label for="published_year" class="form-label fw-semibold">Published Year</label>
-                                <input type="number" class="form-control @error('published_year') is-invalid @enderror"
-                                    id="published_year" name="published_year" value="{{ old('published_year') }}"
-                                    min="1900" max="2100" placeholder="e.g. 2024">
-
-                                @error('published_year')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                <label for="name" class="form-label fw-semibold">Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" value="{{ old('name') }}"
+                                    placeholder="Enter project name">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <div class="form-check mb-4">
-                                <input type="hidden" name="is_available" value="0">
-                                <input class="form-check-input" type="checkbox" id="is_available" name="is_available"
-                                    value="1" {{ old('is_available', 1) ? 'checked' : '' }}>
-                                <label class="form-check-label fw-semibold" for="is_available">
-                                    Available
-                                </label>
+                            <div class="mb-3">
+                                <label for="description" class="form-label fw-semibold">Description</label>
+                                <input type="text" class="form-control @error('description') is-invalid @enderror"
+                                    id="description" name="description" value="{{ old('description') }}"
+                                    placeholder="Enter description">
+                                @error('description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="cover_color" class="form-label fw-semibold">Cover Color</label>
-                                <input type="text" class="form-control @error('cover_color') is-invalid @enderror"
-                                    id="cover_color" name="cover_color" value="{{ old('cover_color') }}"
-                                    placeholder="Enter author name">
+                                <label for="start_date" class="form-label fw-semibold">Start Date</label>
+                                <input type="date" class="form-control @error('start_date') is-invalid @enderror"
+                                    id="start_date" name="start_date" value="{{ old('start_date') }}">
+                                @error('start_date')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-                            @error('cover_color')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
 
                             <div class="mb-3">
-                                <label for="cover_format" class="form-label fw-semibold">Cover Format</label>
-                                <input type="text" class="form-control @error('cover_format') is-invalid @enderror"
-                                    id="cover_format" name="cover_format" value="{{ old('cover_format') }}"
-                                    placeholder="Enter author name">
+                                <label for="end_date" class="form-label fw-semibold">End Date</label>
+                                <input type="date" class="form-control @error('end_date') is-invalid @enderror"
+                                    id="end_date" name="end_date" value="{{ old('end_date') }}">
+                                @error('end_date')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                            @error('cover_format')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="mb-3">
+                                <label for="status" class="form-label fw-semibold">Status</label>
+                                <select class="form-select @error('status') is-invalid @enderror" id="status"
+                                    name="status">
+                                    <option value="">-- Select Status --</option>
+                                    @foreach ($statuses as $status)
+                                        <option value="{{ $status }}"
+                                            {{ old('status') === $status ? 'selected' : '' }}>
+                                            {{ $status }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('status')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                             <div class="d-flex justify-content-end gap-2">
                                 <a href="{{ route('projects.index') }}" class="btn btn-light">
@@ -115,9 +96,12 @@
                                     Save Project
                                 </button>
                             </div>
+
                         </form>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

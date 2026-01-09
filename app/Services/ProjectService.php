@@ -42,11 +42,11 @@ class ProjectService
         $project = Project::findOrFail($id);
 
         $project->update([
-            "name" => $request->name,
-            "description" => $request->description,
-            "start_date" => $request->start_date,
-            "end_date" => $request->end_date,
-            "status" => ProjectStatus::Pending,
+            "name" => isset($request->name) ? $request->name : $project->name,
+            "description" => isset($request->description) ? $request->description : $project->description,
+            "start_date" => isset($request->start_date) ? $request->start_date : $project->start_date,
+            "end_date" => isset($request->end_date) ? $request->end_date : $project->end_date,
+            "status" => isset($request->status) ? $request->status : $project->status,
         ]);
 
         // if ($book->cover()) {
@@ -67,5 +67,10 @@ class ProjectService
     public function deleteProject(int $id): void
     {
         Project::destroy($id);
+    }
+
+    public function getStatuses(): array
+    {
+        return ProjectStatus::cases();
     }
 }
