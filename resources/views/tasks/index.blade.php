@@ -40,9 +40,9 @@
                                     <td>{{ $task->project->name }}</td>
                                     <td>{{ $task->priority }}</td>
                                     <td>
-                                        <span class="badge bg-{{ $task->status->color }}">
-                                            {{ ucfirst($task->status->name) }}
-                                        </span>
+                                        <x-badge type="{{ $task->status->color }}">
+                                            {{ $task->status->name }}
+                                        </x-badge>
                                     </td>
                                     <td>{{ $task->due_date }}</td>
                                     <td>{{ $task->created_at->format('Y-m-d') }}</td>

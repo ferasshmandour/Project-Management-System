@@ -46,9 +46,9 @@
                         <div class="mb-4">
                             <h6 class="text-muted mb-1">Status</h6>
 
-                            <span class="badge bg-{{ $task->status->color }}">
-                                {{ ucfirst($task->status->name) }}
-                            </span>
+                            <x-badge type="{{ $task->status->color }}">
+                                {{ $task->status->name }}
+                            </x-badge>
                         </div>
 
                         <div class="d-flex justify-content-end gap-2">

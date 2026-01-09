@@ -50,10 +50,9 @@
                                                 'panding' => 'warning',
                                             ];
                                         @endphp
-                                        <span
-                                            class="badge bg-{{ $statusClasses[$project->status?->value ?? $project->status] ?? 'secondary' }}">
-                                            {{ ucfirst($project->status?->value ?? $project->status) }}
-                                        </span>
+                                        <x-badge type="{{ $statusClasses[$project->status?->value] }}">
+                                            {{ $project->status?->value }}
+                                        </x-badge>
                                     </td>
                                     <td>{{ $project->created_at->format('Y-m-d') }}</td>
                                     <td>{{ $project->updated_at->format('Y-m-d') }}</td>

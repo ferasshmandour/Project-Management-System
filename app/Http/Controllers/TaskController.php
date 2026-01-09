@@ -111,9 +111,9 @@ class TaskController extends Controller
     {
         try {
             $this->taskService->deAssignTask($id);
-            return redirect()->back()->with("success", "Task assigned successfully");
+            return redirect()->back()->with("success", "Task deassigned successfully");
         } catch (\Exception $e) {
-            return back()->withInput()->with("error", "Error when assign task");
+            return back()->withInput()->with("error", "Error when deassign task");
         }
     }
 }

@@ -9,7 +9,7 @@
             <h2 class="mb-0 fw-bold">Assigned Tasks</h2>
 
             <a href="{{ route('tasks.assignment') }}" class="btn btn-primary btn-sm">
-                Manage Task
+                Assign Task
             </a>
         </div>
 
@@ -39,22 +39,13 @@
                                     <td>{{ $assignedTask->created_at->format('Y-m-d') }}</td>
 
                                     <td class="text-end">
-                                        {{-- <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-outline-info btn-sm">
-                                            View
-                                        </a> --}}
-
-                                        {{-- <a href="{{ route('tasks.edit', $task->id) }}"
-                                            class="btn btn-outline-warning btn-sm">
-                                            Edit
-                                        </a> --}}
-
-                                        {{-- <form action="{{ route('tasks.destroy', $task->id) }}" method="POST"
+                                        <form action="{{ route('tasks.deassign', $assignedTask->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <x-button type="submit" class="btn btn-outline-danger btn-sm"
                                                 needConfirm=true>Delete</x-button>
-                                        </form> --}}
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

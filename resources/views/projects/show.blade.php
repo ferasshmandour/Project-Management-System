@@ -49,18 +49,18 @@
                             @php
                                 $statusClasses = [
                                     'new' => 'secondary',
-                                    'active' => 'primary',
+                                    'active' => 'success',
                                     'completed' => 'success',
                                     'inactive' => 'danger',
-                                    'panding' => 'warning',
+                                    'panding' => 'primary',
                                 ];
 
                                 $statusValue = $project->status?->value ?? $project->status;
                             @endphp
 
-                            <span class="badge bg-{{ $statusClasses[$statusValue] ?? 'secondary' }}">
-                                {{ ucfirst($statusValue) }}
-                            </span>
+                            <x-badge type="{{ $statusClasses[$statusValue] }}">
+                                {{ $statusValue }}
+                            </x-badge>
                         </div>
 
                         <div class="d-flex justify-content-end gap-2">
@@ -75,9 +75,9 @@
                     <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
                         <h5 class="fw-semibold mb-0">Project Tasks</h5>
 
-                        <span class="badge bg-secondary">
+                        <x-badge type="secondary">
                             {{ $tasks->count() }} Tasks
-                        </span>
+                        </x-badge>
                     </div>
 
                     <div class="card-body p-0">
@@ -104,15 +104,15 @@
                                                 </td>
 
                                                 <td>
-                                                    <span class="badge bg-info">
-                                                        {{ ucfirst($task->status->name ?? '—') }}
-                                                    </span>
+                                                    <x-badge type="{{ $task->status->color }}">
+                                                        {{ $task->status->name }}
+                                                    </x-badge>
                                                 </td>
 
                                                 <td>
-                                                    <span class="badge bg-warning text-dark">
-                                                        {{ ucfirst($task->priority) }}
-                                                    </span>
+                                                    <x-badge type="warning text-dark">
+                                                        {{ $task->priority }}
+                                                    </x-badge>
                                                 </td>
 
                                                 <td>
