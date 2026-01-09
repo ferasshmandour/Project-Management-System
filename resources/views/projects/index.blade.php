@@ -40,11 +40,30 @@
                                     <td>{{ $project->description }}</td>
                                     <td>{{ $project->start_date }}</td>
                                     <td>{{ $project->end_date }}</td>
-                                    <td>{{ $project->status }}</td>
+                                    <td>
+                                        @php
+                                            $statusClasses = [
+                                                'new' => 'secondary',
+                                                'active' => 'primary',
+                                                'completed' => 'success',
+                                                'inactive' => 'danger',
+                                                'panding' => 'warning',
+                                            ];
+                                        @endphp
+                                        <span
+                                            class="badge bg-{{ $statusClasses[$project->status?->value ?? $project->status] ?? 'secondary' }}">
+                                            {{ ucfirst($project->status?->value ?? $project->status) }}
+                                        </span>
+                                    </td>
                                     <td>{{ $project->created_at->format('Y-m-d') }}</td>
                                     <td>{{ $project->updated_at->format('Y-m-d') }}</td>
 
                                     <td class="text-end">
+                                        <a href="{{ route('projects.show', $project->id) }}"
+                                            class="btn btn-outline-info btn-sm">
+                                            View
+                                        </a>
+
                                         <a href="{{ route('projects.edit', $project->id) }}"
                                             class="btn btn-outline-warning btn-sm">
                                             Edit
@@ -61,7 +80,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center py-4 text-muted">
+                                    <td colspan="9" class="text-center py-4 text-muted">
                                         No projects found 📭
                                     </td>
                                 </tr>

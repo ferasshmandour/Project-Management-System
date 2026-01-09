@@ -7,13 +7,16 @@ use App\Services\ProjectService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Services\TaskService;
 
 class ProjectController extends Controller
 {
+    private TaskService $taskService;
     private ProjectService $projectService;
 
-    public function __construct(ProjectService $projectService)
+    public function __construct(TaskService $taskService, ProjectService $projectService)
     {
+        $this->taskService = $taskService;
         $this->projectService = $projectService;
     }
 
@@ -26,7 +29,9 @@ class ProjectController extends Controller
     public function show(int $id): View
     {
         $project = $this->projectService->getProject($id);
-        return view("projects.view", compact("project"));
+        $tasks = $this->taskService->getTasksRelatedToProject($id);
+
+        return view("projects.show", compact("project", "tasks"));
     }
 
     public function create(): View

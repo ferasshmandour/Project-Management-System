@@ -6,15 +6,18 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Services\ProjectService;
 use App\Services\TaskService;
 
 class TaskController extends Controller
 {
     private TaskService $taskService;
+    private ProjectService $projectService;
 
-    public function __construct(TaskService $taskService)
+    public function __construct(TaskService $taskService, ProjectService $projectService)
     {
         $this->taskService = $taskService;
+        $this->projectService = $projectService;
     }
 
     public function index(): View
@@ -31,7 +34,10 @@ class TaskController extends Controller
 
     public function create(): View
     {
-        return view("tasks.create");
+        $statuses = $this->taskService->taskStatuses();
+        $projects = $this->projectService->getProjects();
+
+        return view("tasks.create", compact("statuses", "projects"));
     }
 
     public function store(StoreTaskRequest $request)
@@ -47,7 +53,10 @@ class TaskController extends Controller
     public function edit(int $id): View
     {
         $task = $this->taskService->getTask($id);
-        return view("tasks.edit", compact("task"));
+        $statuses = $this->taskService->taskStatuses();
+        $projects = $this->projectService->getProjects();
+
+        return view("tasks.edit", compact("task", "statuses", "projects"));
     }
 
     public function update(UpdateTaskRequest $request, int $id)

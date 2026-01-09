@@ -29,12 +29,6 @@ class ProjectService
             "end_date" => $request->end_date,
             "status" => ProjectStatus::New,
         ]);
-
-        //Cover::create([
-        //    "book_id" => $book->id,
-        //    "color" => $request->cover_color,
-        //    "format" => $request->cover_format,
-        //]);
     }
 
     public function updateProject(UpdateProjectRequest $request, int $id): void
@@ -48,20 +42,6 @@ class ProjectService
             "end_date" => isset($request->end_date) ? $request->end_date : $project->end_date,
             "status" => isset($request->status) ? $request->status : $project->status,
         ]);
-
-        // if ($book->cover()) {
-        //     $book->cover()->update([
-        //         "book_id" => $book->id,
-        //         "color" => isset($request->cover_color) ? $request->cover_color : $book->color,
-        //         "format" => isset($request->cover_format) ? $request->cover_format : $book->format,
-        //     ]);
-        // } else {
-        //     Cover::create([
-        //         "book_id" => $book->id,
-        //         "color" => $request->cover_color,
-        //         "format" => $request->cover_format,
-        //     ]);
-        // }
     }
 
     public function deleteProject(int $id): void

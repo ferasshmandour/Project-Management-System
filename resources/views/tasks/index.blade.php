@@ -22,9 +22,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
-                                <th>Author</th>
-                                <th>Published</th>
+                                <th>Project</th>
+                                <th>Priority</th>
                                 <th>Status</th>
+                                <th>Due Date</th>
                                 <th>Created</th>
                                 <th>Updated</th>
                                 <th class="text-end">Actions</th>
@@ -32,29 +33,32 @@
                         </thead>
 
                         <tbody>
-                            @forelse ($books as $book)
+                            @forelse ($tasks as $task)
                                 <tr>
-                                    <td class="fw-semibold">{{ $book->id }}</td>
-                                    <td>{{ $book->title }}</td>
-                                    <td>{{ $book->author }}</td>
-                                    <td>{{ $book->published_year }}</td>
+                                    <td class="fw-semibold">{{ $task->id }}</td>
+                                    <td>{{ $task->title }}</td>
+                                    <td>{{ $task->project->name }}</td>
+                                    <td>{{ $task->priority }}</td>
                                     <td>
-                                        @if ($book->is_available)
-                                            <span class="badge bg-success">Available</span>
-                                        @else
-                                            <span class="badge bg-danger">Not Available</span>
-                                        @endif
+                                        <span class="badge bg-{{ $task->status->color }}">
+                                            {{ ucfirst($task->status->name) }}
+                                        </span>
                                     </td>
-                                    <td class="text-muted">{{ $book->created_at->format('Y-m-d') }}</td>
-                                    <td class="text-muted">{{ $book->updated_at->format('Y-m-d') }}</td>
-                                    <td class="text-end">
+                                    <td>{{ $task->due_date }}</td>
+                                    <td>{{ $task->created_at->format('Y-m-d') }}</td>
+                                    <td>{{ $task->updated_at->format('Y-m-d') }}</td>
 
-                                        <a href="{{ route('tasks.edit', $book->id) }}"
+                                    <td class="text-end">
+                                        <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-outline-info btn-sm">
+                                            View
+                                        </a>
+
+                                        <a href="{{ route('tasks.edit', $task->id) }}"
                                             class="btn btn-outline-warning btn-sm">
                                             Edit
                                         </a>
 
-                                        <form action="{{ route('tasks.delete', $book->id) }}" method="POST"
+                                        <form action="{{ route('tasks.destroy', $task->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
@@ -65,7 +69,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center py-4 text-muted">
+                                    <td colspan="9" class="text-center py-4 text-muted">
                                         No tasks found 📭
                                     </td>
                                 </tr>

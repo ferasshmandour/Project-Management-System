@@ -33,91 +33,83 @@
                             @csrf
 
                             <div class="mb-3">
-                                <label for="title" class="form-label fw-semibold">Title</label>
+                                <label for="title" class="form-label fw-semibold">title</label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror"
                                     id="title" name="title" value="{{ old('title') }}"
-                                    placeholder="Enter book title">
-                            </div>
-
-                            @error('title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                            <div class="mb-3">
-                                <label for="author" class="form-label fw-semibold">Author</label>
-                                <input type="text" class="form-control @error('author') is-invalid @enderror"
-                                    id="author" name="author" value="{{ old('author') }}"
-                                    placeholder="Enter author name">
-                            </div>
-
-                            @error('author')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-
-                            <div class="mb-3">
-                                <label for="published_year" class="form-label fw-semibold">Published Year</label>
-                                <input type="number" class="form-control @error('published_year') is-invalid @enderror"
-                                    id="published_year" name="published_year" value="{{ old('published_year') }}"
-                                    min="1900" max="2100" placeholder="e.g. 2024">
-
-                                @error('published_year')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                    placeholder="Enter task title">
+                                @error('title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <div class="form-check mb-4">
-                                <input type="hidden" name="is_available" value="0">
-                                <input class="form-check-input" type="checkbox" id="is_available" name="is_available"
-                                    value="1" {{ old('is_available', 1) ? 'checked' : '' }}>
-                                <label class="form-check-label fw-semibold" for="is_available">
-                                    Available
-                                </label>
+                            <div class="mb-3">
+                                <label for="priority" class="form-label fw-semibold">Priority</label>
+                                <input type="number" class="form-control @error('priority') is-invalid @enderror"
+                                    id="priority" name="priority" value="{{ old('priority') }}" min="1"
+                                    max="5" placeholder="Enter priority">
+                                @error('priority')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label for="cover_color" class="form-label fw-semibold">Cover Color</label>
-                                <input type="text" class="form-control @error('cover_color') is-invalid @enderror"
-                                    id="cover_color" name="cover_color" value="{{ old('cover_color') }}"
-                                    placeholder="Enter author name">
+                                <label for="due_date" class="form-label fw-semibold">Due Date</label>
+                                <input type="date" class="form-control @error('due_date') is-invalid @enderror"
+                                    id="due_date" name="due_date" value="{{ old('due_date') }}">
+                                @error('due_date')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-                            @error('cover_color')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
 
                             <div class="mb-3">
-                                <label for="cover_format" class="form-label fw-semibold">Cover Format</label>
-                                <input type="text" class="form-control @error('cover_format') is-invalid @enderror"
-                                    id="cover_format" name="cover_format" value="{{ old('cover_format') }}"
-                                    placeholder="Enter author name">
+                                <label for="project_id" class="form-label fw-semibold">Project</label>
+                                <select class="form-select @error('project_id') is-invalid @enderror" id="project_id"
+                                    name="project_id">
+                                    <option value="">-- Select Project --</option>
+                                    @foreach ($projects as $project)
+                                        <option value="{{ $project->id }}"
+                                            {{ old('project_id') === $project->id ? 'selected' : '' }}>
+                                            {{ $project->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('project_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
-                            @error('cover_format')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="mb-3">
+                                <label for="status_id" class="form-label fw-semibold">Status</label>
+                                <select class="form-select @error('status_id') is-invalid @enderror" id="status_id"
+                                    name="status_id">
+                                    <option value="">-- Select Status --</option>
+                                    @foreach ($statuses as $status)
+                                        <option value="{{ $status->id }}"
+                                            {{ old('status_id') === $status->id ? 'selected' : '' }}>
+                                            {{ $status->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('status_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                             <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ route('tasks.index') }}" class="btn btn-light">
+                                <a href="{{ route('projects.index') }}" class="btn btn-light">
                                     Cancel
                                 </a>
 
                                 <button type="submit" class="btn btn-success">
-                                    Save Task
+                                    Save Project
                                 </button>
                             </div>
+
                         </form>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
