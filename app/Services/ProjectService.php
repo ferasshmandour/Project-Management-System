@@ -22,7 +22,7 @@ class ProjectService
 
     public function createProject(StoreProjectRequest $request): void
     {
-        $project = Project::create([
+        Project::create([
             "name" => $request->name,
             "description" => $request->description,
             "start_date" => $request->start_date,

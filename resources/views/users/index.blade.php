@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Assigned Tasks')
+@section('title', 'User List')
 
 @section('content')
     <div class="container-fluid">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0 fw-bold">Assigned Tasks</h2>
+            <h2 class="mb-0 fw-bold">User List</h2>
 
-            <a href="{{ route('tasks.assignment') }}" class="btn btn-primary btn-sm">
-                Assign Task
+            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm">
+                Add User
             </a>
         </div>
 
@@ -21,37 +21,37 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
-                                <th>User</th>
-                                <th>Task</th>
-                                <th>Project</th>
-                                <th>Assigned Date</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Craeted</th>
+                                <th>Updated</th>
                                 <th class="text-end">Actions</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @forelse ($assignedTasks as $assignedTask)
+                            @forelse ($users as $user)
                                 <tr>
-                                    <td class="fw-semibold">{{ $assignedTask->id }}</td>
-                                    <td>{{ $assignedTask->user->name }}</td>
-                                    <td>{{ $assignedTask->task->title }}</td>
-                                    <td>{{ $assignedTask->task->project->name }}</td>
-                                    <td>{{ $assignedTask->created_at->format('Y-m-d') }}</td>
+                                    <td class="fw-semibold">{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->created_at->format('Y-m-d') }}</td>
+                                    <td>{{ $user->updated_at->format('Y-m-d') }}</td>
 
                                     <td class="text-end">
-                                        <form action="{{ route('tasks.deassign', $assignedTask->id) }}" method="POST"
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST"
                                             class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <x-button type="submit" class="btn btn-outline-danger btn-sm"
-                                                needConfirm=true>De Assign Task</x-button>
+                                                needConfirm=true>Delete</x-button>
                                         </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="9" class="text-center py-4 text-muted">
-                                        No assigned tasks found 📭
+                                        No users found 📭
                                     </td>
                                 </tr>
                             @endforelse
