@@ -8,15 +8,17 @@ use Illuminate\View\Component;
 
 class Input extends Component
 {
-    public $type;
-    public $id;
-    public $name;
+    public string $type;
+    public ?string $id;
+    public string $name;
+    public mixed $value;
 
-    public function __construct($type = null, $id = null, $name = null)
+    public function __construct(string $name, string $type = 'text', ?string $id = null, $value = null)
     {
         $this->type = $type;
         $this->id = $id;
         $this->name = $name;
+        $this->value = $value;
     }
 
     /**

@@ -32,13 +32,13 @@
                         <form action="{{ route('projects.store') }}" method="POST">
                             @csrf
 
-                            <x-input type="text" id="name" name="name">Name</x-input>
+                            <x-input name="name">Name</x-input>
 
-                            <x-input type="text" id="description" name="description">Description</x-input>
+                            <x-input name="description">Description</x-input>
 
-                            <x-input type="date" id="start_date" name="start_date">Start Date</x-input>
+                            <x-input type="date" name="start_date">Start Date</x-input>
 
-                            <x-input type="date" id="end_date" name="end_date">End Date</x-input>
+                            <x-input type="date" name="end_date">End Date</x-input>
 
                             <div class="mb-3">
                                 <label for="status" class="form-label fw-semibold">Status</label>

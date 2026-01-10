@@ -33,45 +33,13 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="mb-3">
-                                <label for="name" class="form-label fw-semibold">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="{{ old('name', $project->name) }}"
-                                    placeholder="Enter project name">
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input name="name" :value="$project->name">Name</x-input>
 
-                            <div class="mb-3">
-                                <label for="description" class="form-label fw-semibold">Description</label>
-                                <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                    id="description" name="description"
-                                    value="{{ old('description', $project->description) }}" placeholder="Enter description">
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input name="description" :value="$project->description">Description</x-input>
 
-                            <div class="mb-3">
-                                <label for="start_date" class="form-label fw-semibold">Start Date</label>
-                                <input type="date" class="form-control @error('start_date') is-invalid @enderror"
-                                    id="start_date" name="start_date"
-                                    value="{{ old('start_date', $project->start_date?->format('Y-m-d')) }}">
-                                @error('start_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input type="start_date" name="start_date" :value="$project->start_date">Start Date</x-input>
 
-                            <div class="mb-3">
-                                <label for="end_date" class="form-label fw-semibold">End Date</label>
-                                <input type="date" class="form-control @error('end_date') is-invalid @enderror"
-                                    id="end_date" name="end_date"
-                                    value="{{ old('end_date', $project->end_date?->format('Y-m-d')) }}">
-                                @error('end_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input type="end_date" name="end_date" :value="$project->end_date">End Date</x-input>
 
                             <div class="mb-3">
                                 <label for="status" class="form-label fw-semibold">Status</label>
@@ -89,7 +57,6 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
 
                             <div class="d-flex justify-content-end gap-2">
                                 <a href="{{ route('projects.index') }}" class="btn btn-light">
