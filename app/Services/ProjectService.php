@@ -15,7 +15,7 @@ class ProjectService
         return Project::all();
     }
 
-    public function getProject(int $id): Project
+    public function getProject($id): Project
     {
         return Project::findOrFail($id);
     }

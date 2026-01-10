@@ -76,12 +76,12 @@
                         <h5 class="fw-semibold mb-0">Project Tasks</h5>
 
                         <x-badge type="secondary">
-                            {{ $tasks->count() }} Tasks
+                            {{ $project->tasks->count() }} Tasks
                         </x-badge>
                     </div>
 
                     <div class="card-body p-0">
-                        @if ($tasks->isEmpty())
+                        @if ($project->tasks->isEmpty())
                             <div class="p-4 text-center text-muted">
                                 No tasks are assigned to this project.
                             </div>
@@ -97,7 +97,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($tasks as $task)
+                                        @foreach ($project->tasks as $task)
                                             <tr>
                                                 <td class="fw-semibold">
                                                     {{ $task->title }}
