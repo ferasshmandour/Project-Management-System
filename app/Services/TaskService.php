@@ -3,13 +3,14 @@
 namespace App\Services;
 
 use App\Models\Task;
-use App\Enums\TaskStatus;
+use App\Models\Status;
+use App\Models\TaskUser;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\AssignTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Models\Status;
-use App\Models\TaskUser;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class TaskService
 {
@@ -82,5 +83,21 @@ class TaskService
     public function deAssignTask(int $id): void
     {
         TaskUser::destroy($id);
+    }
+
+    public function getUserTasks($userId)
+    {
+        return DB::table('task_user as tu')
+            ->join('tasks as t', 't.id', '=', 'tu.task_id')
+            ->where('tu.user_id', $userId)
+            ->get();
+    }
+
+    public function updateTaskStatus(Request $request, $taskId): void
+    {
+        $status = strtolower($request->query('status'));
+        Task::where('id', $taskId)->update([
+            'status_id' => Status::where('name', $status)->first()->id,
+        ]);
     }
 }
