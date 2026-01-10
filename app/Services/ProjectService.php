@@ -12,12 +12,12 @@ class ProjectService
 {
     public function getProjects(): Collection
     {
-        return Project::all();
+        return Project::with('tasks')->get();
     }
 
     public function getProject($id): Project
     {
-        return Project::findOrFail($id);
+        return Project::with('tasks')->findOrFail($id);
     }
 
     public function createProject(StoreProjectRequest $request): void

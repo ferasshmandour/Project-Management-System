@@ -16,7 +16,7 @@ class TaskService
 {
     public function getTasks(): Collection
     {
-        return Task::all();
+        return Task::with('users')->get();
     }
 
     public function getTasksRelatedToProject($projectId): Collection
@@ -26,7 +26,7 @@ class TaskService
 
     public function getTask($id): Task
     {
-        return Task::findOrFail($id);
+        return Task::with('users')->findOrFail($id);
     }
 
     public function createTask(StoreTaskRequest $request): void

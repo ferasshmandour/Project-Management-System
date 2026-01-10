@@ -26,6 +26,7 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Status</th>
+                                <th>Tasks</th>
                                 <th>Created</th>
                                 <th>Updated</th>
                                 <th class="text-end">Actions</th>
@@ -54,6 +55,7 @@
                                             {{ $project->status?->value }}
                                         </x-badge>
                                     </td>
+                                    <td>{{ $project->tasks->count() }}</td>
                                     <td>{{ $project->created_at->format('Y-m-d') }}</td>
                                     <td>{{ $project->updated_at->format('Y-m-d') }}</td>
 
@@ -79,7 +81,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="9" class="text-center py-4 text-muted">
+                                    <td colspan="10" class="text-center py-4 text-muted">
                                         No projects found 📭
                                     </td>
                                 </tr>
