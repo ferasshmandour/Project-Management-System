@@ -32,43 +32,13 @@
                         <form action="{{ route('projects.store') }}" method="POST">
                             @csrf
 
-                            <div class="mb-3">
-                                <label for="name" class="form-label fw-semibold">Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="{{ old('name') }}"
-                                    placeholder="Enter project name">
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input type="text" id="name" name="name">Name</x-input>
 
-                            <div class="mb-3">
-                                <label for="description" class="form-label fw-semibold">Description</label>
-                                <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                    id="description" name="description" value="{{ old('description') }}"
-                                    placeholder="Enter description">
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input type="text" id="description" name="description">Description</x-input>
 
-                            <div class="mb-3">
-                                <label for="start_date" class="form-label fw-semibold">Start Date</label>
-                                <input type="date" class="form-control @error('start_date') is-invalid @enderror"
-                                    id="start_date" name="start_date" value="{{ old('start_date') }}">
-                                @error('start_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input type="date" id="start_date" name="start_date">Start Date</x-input>
 
-                            <div class="mb-3">
-                                <label for="end_date" class="form-label fw-semibold">End Date</label>
-                                <input type="date" class="form-control @error('end_date') is-invalid @enderror"
-                                    id="end_date" name="end_date" value="{{ old('end_date') }}">
-                                @error('end_date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <x-input type="date" id="end_date" name="end_date">End Date</x-input>
 
                             <div class="mb-3">
                                 <label for="status" class="form-label fw-semibold">Status</label>
